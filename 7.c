@@ -8,26 +8,26 @@ struct node
     int front, rear, size;
 };
 
-typedef struct node cq;
+typedef struct node *cq;
 
-void initialize(cq *q)
+void initialize(cq q)
 {
     q->size = 0;
     q->front = 0;
     q->rear = -1;
 }
 
-int isFull(cq *q)
+int isFull(cq q)
 {
     return (q->size == MAX);
 }
 
-int isEmpty(cq *q)
+int isEmpty(cq q)
 {
     return (q->size == 0);
 }
 
-void insert(cq *q, char item)
+void insert(cq q, char item)
 {
     if (isFull(q))
     {
@@ -41,7 +41,7 @@ void insert(cq *q, char item)
     printf("Inserted element %c\n", item);
 }
 
-void delete(cq *q)
+void delete(cq q)
 {
     if (isEmpty(q))
     {
@@ -54,7 +54,7 @@ void delete(cq *q)
     q->size--;
 }
 
-void display(cq *q)
+void display(cq q)
 {
     if (isEmpty(q))
     {
@@ -75,14 +75,14 @@ void display(cq *q)
 
 int main()
 {
-    cq q;
-    initialize(&q);
+    cq q = (cq)malloc(sizeof(q));
+    initialize(q);
     int choice;
     char item;
 
     while (1)
     {
-        printf("1. Insert\n2. Delete\n3. Display\n4. Exitn\nChoice: ");
+        printf("1. Insert\n2. Delete\n3. Display\n4. Exit\nChoice: ");
         scanf("%d", &choice);
 
         switch (choice)
@@ -90,15 +90,15 @@ int main()
         case 1:
             printf("Enter element to insert: ");
             scanf(" %c", &item);
-            insert(&q, item);
+            insert(q, item);
             break;
 
         case 2:
-            delete (&q);
+            delete (q);
             break;
 
         case 3:
-            display(&q);
+            display(q);
             break;
 
         case 4:
